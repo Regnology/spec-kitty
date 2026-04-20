@@ -1,0 +1,124 @@
+schema_version: "1.0"
+id: stakeholder-communication-planning
+name: Stakeholder Communication Planning
+purpose: >
+  Produce a durable, reviewed communication plan that coordinates all significant
+  message events for an initiative across its full lifecycle — from initiation
+  through delivery and retrospective. The plan ensures that every affected
+  stakeholder receives the right information at the right time through a
+  channel matched to their context, and that no group learns about significant
+  changes through rumour or side channels.
+entry_condition: >
+  An initiative or process change affects more than one audience segment and
+  spans more than one communication event. The initiative sponsor or owner has
+  committed to supporting the communication process and is available to review
+  and approve the plan.
+exit_condition: >
+  A communication plan artefact exists that documents: all affected audience
+  segments with their prior knowledge and information needs assessed, all
+  trigger events mapped to audience-message-channel-owner-deadline tuples, at
+  least one feedback mechanism per significant segment, and a review cadence
+  aligned with the initiative's milestone schedule. The plan has been reviewed
+  and approved by the initiative sponsor.
+steps:
+  - title: Scope the initiative and its phases
+    description: >
+      Identify the initiative's major phases, milestones, and decision points.
+      Establish the communication plan's time horizon. For multi-year initiatives,
+      plan in detail for the current phase and at a high level for subsequent phases
+      — detailed planning for distant phases is premature until scope is stable.
+    actor: agent
+  - title: Conduct audience analysis
+    description: >
+      Apply the Audience Analysis tactic to enumerate all stakeholder segments,
+      assess their prior knowledge, identify their information needs per phase,
+      and map their emotional and organisational context. Record findings in the
+      plan artefact. This step must not be skipped even when the audience seems
+      obvious — stakeholder maps consistently reveal segments overlooked during
+      initial planning.
+    actor: agent
+  - title: Identify trigger events and communication obligations
+    description: >
+      For each phase, list every event that requires a communication: decisions,
+      milestones, scope changes, delays, completions, and escalations. Flag
+      which events have regulatory, contractual, or SLA-based communication
+      obligations — these are non-negotiable and must be planned first.
+    actor: agent
+  - title: Design messages per event-audience pair
+    description: >
+      Apply the Message Framing tactic to draft the core message for each
+      significant event-audience combination. Record the structural pattern
+      chosen (BLUF, Problem-Solution-Benefit, Situation-Complication-Resolution)
+      and the rationale. Full message drafts are not required at this stage —
+      the core message and structure are sufficient for planning purposes.
+    actor: agent
+  - title: Assign channels, owners, and deadlines
+    description: >
+      For each communication event, assign: the delivery channel, the message
+      owner (the person accountable for delivery), the author (may differ from
+      owner), and the deadline relative to the trigger event. Record these
+      assignments in a structured table in the plan artefact.
+    actor: human
+    on_failure: >
+      If an owner cannot be identified for a significant communication event,
+      escalate to the initiative sponsor before continuing. Unowned communications
+      are a plan failure waiting to happen.
+  - title: Design feedback loops
+    description: >
+      For each significant audience segment, specify at least one mechanism for
+      receiving and responding to feedback: a designated reply-to contact, a Q&A
+      session slot, a response form, or a structured check-in. Record who owns
+      each feedback channel and how responses will be incorporated into subsequent
+      communications.
+    actor: agent
+  - title: Review and sponsor approval
+    description: >
+      Present the plan to the initiative sponsor for review and approval. Verify
+      that the sponsor agrees with the audience map, the message content for
+      high-stakes events, and the feedback mechanisms. Obtain explicit approval
+      before the plan is activated. Record the approval in the plan artefact.
+    actor: human
+  - title: Execute, monitor, and update
+    description: >
+      Activate the plan at initiative kick-off. At each milestone, review the
+      upcoming communication events, update message content to reflect any
+      changes since the plan was last revised, and confirm that owners and
+      deadlines remain valid. Record feedback received and adjustments made.
+      Archive completed events with a brief effectiveness note.
+    actor: agent
+references:
+  - type: tactic
+    id: audience-analysis
+    reason: Required input to step 2 — audience segmentation and knowledge assessment.
+  - type: tactic
+    id: message-framing
+    reason: Required input to step 4 — message structure and vocabulary calibration.
+  - type: tactic
+    id: stakeholder-alignment
+    reason: When the audience map reveals conflicting stakeholder priorities, alignment must precede messaging.
+  - type: tactic
+    id: communication-plan
+    reason: Tactic-level guidance for designing individual communication events within this procedure.
+  - type: tactic
+    id: change-management-comms
+    reason: When the initiative involves a significant organisational or process change.
+anti_patterns:
+  - name: Point-in-Time Plan
+    description: >
+      Creating the communication plan at initiative kick-off and treating it as
+      complete for the duration of the initiative. Plans that are not updated at
+      each milestone become irrelevant within the first phase.
+  - name: Positive-Events-Only Plan
+    description: >
+      Designing communications only for successes and milestones while leaving
+      delays, scope changes, and incidents to reactive ad-hoc communication.
+      Stakeholders who are surprised by negative events lose trust in the
+      initiative's leadership faster than stakeholders who are proactively informed.
+  - name: Single-Channel Plan
+    description: >
+      Delivering all communications through one channel regardless of audience
+      or message type. Channel fatigue causes high-priority messages to be missed.
+notes: >
+  The communication plan artefact should be stored alongside the initiative's
+  planning documents and linked from the initiative charter or brief. It is a
+  living document, not a deliverable that is completed and filed.

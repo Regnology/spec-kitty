@@ -1,0 +1,192 @@
+schema_version: "1.0"
+id: workshop-facilitation
+name: Workshop Facilitation
+purpose: >
+  Prepare a structured multi-segment group session — workshop, training, or
+  decision session — so that the Human-in-Charge can run it without making
+  structural decisions in the room, and synthesise the raw session output into
+  a durable, actionable artefact after execution. The agent's role is entirely
+  in preparation and post-session processing; live execution belongs to the
+  Human-in-Charge. A workshop without a clearly designed output and a prepared
+  facilitator guide is a meeting with activities.
+entry_condition: >
+  A defined output is required that cannot be produced without active group
+  participation. The output type is one of: a shared artefact (model, map, plan,
+  decision set), a validated understanding, or a committed agreement. The
+  participants are identified. The session goal has been confirmed by the
+  Human-in-Charge. Preparation begins at least 48 hours before the session.
+exit_condition: >
+  Preparation complete: session design document, segment-by-segment facilitator
+  guide, participant pre-read, and all session materials are ready and reviewed
+  by the Human-in-Charge before the session. Post-session complete: a synthesis
+  artefact exists containing confirmed decisions, parked items, open questions,
+  and an action register with named owners and deadlines. The Human-in-Charge
+  has confirmed the synthesis before it is distributed.
+steps:
+  - title: Define the session output and success criteria
+    description: >
+      Before designing any activity, write the session's output as a concrete
+      deliverable: what artefact or agreement will exist at the end that does not
+      exist now? Define success criteria: how will the Human-in-Charge and
+      participants know whether the output is valid and complete?
+      Activities are selected to produce the output — the output is not a
+      byproduct of the activities.
+    actor: agent
+  - title: Analyse the participant group
+    description: >
+      Apply the Audience Analysis tactic to the participant group. Identify what
+      each participant brings (knowledge, role, stake) and what they need from
+      the session (information, validation, influence, commitment). Flag any known
+      tensions between participant groups for the Human-in-Charge's awareness.
+      This analysis drives the session structure and the pre-read content.
+    actor: agent
+  - title: Structure the session into segments
+    description: >
+      Divide the session into named segments with explicit time allocations and
+      a defined output per segment. Standard structure:
+
+      Opening (10%): establish psychological safety, state the goal and output,
+      confirm the agenda and norms.
+
+      Diverge (30%): generate raw material — ideas, options, information,
+      concerns — without filtering. Parallel generation (individual before group)
+      reduces social pressure and prevents early anchoring.
+
+      Converge (40%): cluster, prioritise, evaluate, and decide. Specify the
+      decision method (dot voting, criteria scoring, consensus check) — do not
+      leave this to open discussion, which favours the loudest voices.
+
+      Close (20%): confirm the output aloud, assign actions with owners and
+      deadlines, acknowledge contributions, capture parking-lot items.
+
+      Adjust allocations to the session's goal: discovery sessions are more
+      divergent; decision sessions are more convergent. Record the rationale
+      for the chosen structure in the session design document.
+    actor: agent
+  - title: Write the facilitator guide
+    description: >
+      Produce a segment-by-segment guide the Human-in-Charge will use to run
+      the session. For each segment include: the segment goal, the exact
+      instructions to give participants (written as scripts, not summaries),
+      timing markers, the convergence or decision method, and a specific
+      recovery move if the segment stalls or diverges off-topic. Apply the
+      facilitation-language styleguide throughout. The guide must be usable
+      without the agent present — assume the Human-in-Charge reads it cold
+      five minutes before the session starts.
+    actor: agent
+  - title: Prepare participant materials
+    description: >
+      Produce all materials participants will use during the session: canvases,
+      templates, voting sheets, scenario prompts, or structured input forms.
+      Label each material with the segment it belongs to and the instructions
+      for its use. Materials should reduce cognitive load during the session,
+      not add to it.
+    actor: agent
+  - title: Write and distribute the pre-read
+    description: >
+      Produce a pre-read for participants covering: the session goal and output,
+      the agenda with segment durations, any pre-work required (reading,
+      reflection, data gathering), and a specific ask — what each participant
+      should bring or prepare. Apply the audience-aware-writing styleguide.
+      The Human-in-Charge sends the pre-read at least 48 hours before the
+      session. Participants who arrive unprepared constrain the diverge phase.
+    actor: agent
+    on_success: Hand the full preparation pack (design document, guide, materials, pre-read) to the Human-in-Charge for review before distribution.
+  - title: Human-in-Charge reviews and approves the preparation pack
+    description: >
+      The Human-in-Charge reviews the session design document, facilitator guide,
+      materials, and pre-read. They confirm that the output goal, segment
+      structure, and participant ask are correct, and that the facilitator guide
+      is usable as written. The agent addresses any revision requests before
+      the pre-read is sent. This step must complete before the pre-read is
+      distributed.
+    actor: human
+    on_failure: Return to the relevant preparation step and revise. Do not distribute any materials until the Human-in-Charge has approved the pack.
+  - title: Human-in-Charge runs the session
+    description: >
+      The Human-in-Charge executes the session using the prepared facilitator
+      guide and materials. The agent is not present. Raw output — transcript,
+      notes, voted items, completed canvases — is collected by the Human-in-Charge
+      and handed to the agent after the session for synthesis.
+    actor: human
+    on_success: Human-in-Charge provides raw session output to the agent for synthesis.
+    on_failure: Human-in-Charge notes what deviated from the guide (segments skipped, decisions deferred, unexpected conflicts) and includes this context with the raw output.
+  - title: Synthesise the session output
+    description: >
+      Apply the Session Output Synthesis tactic to the raw output received from
+      the Human-in-Charge. Produce a structured synthesis document containing:
+      the confirmed session goal and whether it was met, decisions reached with
+      the reasoning that led to them, items explicitly parked with their assigned
+      owners, open questions that remain unresolved, and an action register
+      (action, owner, deadline, done criterion). Where the raw output is
+      ambiguous, flag it for the Human-in-Charge to resolve rather than
+      inferring silently.
+    actor: agent
+  - title: Human-in-Charge confirms the synthesis
+    description: >
+      The Human-in-Charge reviews the synthesis document and confirms that it
+      accurately reflects what happened in the session. They resolve any items
+      the agent flagged as ambiguous. The synthesis must be confirmed before it
+      is distributed. Post-session disputes about what was decided are almost
+      always the result of distributing an unconfirmed synthesis.
+    actor: human
+    on_success: Agent distributes the confirmed synthesis to participants and relevant non-attendees within 24 hours of the session.
+  - title: Distribute the confirmed session summary
+    description: >
+      Send the confirmed synthesis to all participants and relevant non-attendees
+      within 24 hours of the session. The summary must include: the session goal
+      and whether it was met, decisions and their rationale, the action register,
+      parked items, and open questions with owners. A session whose output is
+      not distributed within 24 hours loses the commitment momentum that
+      synchronous work creates.
+    actor: agent
+references:
+  - type: tactic
+    id: audience-analysis
+    reason: Required for analysing the participant group in step 2.
+  - type: tactic
+    id: meeting-facilitation
+    reason: Provides session-design vocabulary and the pre-read and closing-confirmation contracts.
+  - type: tactic
+    id: session-output-synthesis
+    reason: Applied in step 8 to convert raw session output into a structured, distributable synthesis artefact.
+  - type: tactic
+    id: stakeholder-alignment
+    reason: When the participant analysis reveals known tensions, alignment context shapes the convergence design and facilitator guide.
+  - type: tactic
+    id: problem-decomposition
+    reason: When the session's diverge phase involves breaking down a complex problem; structures the diverge activities.
+  - type: styleguide
+    id: facilitation-language
+    reason: Governs facilitator guide language, opening scripts, and activity instructions.
+  - type: styleguide
+    id: audience-aware-writing
+    reason: Governs the pre-read and any participant materials.
+anti_patterns:
+  - name: Activity Without Output
+    description: >
+      Designing activities without a defined output those activities are meant to
+      produce. Participants leave feeling busy but cannot point to a concrete
+      artefact, and the synthesis step has nothing to work with.
+  - name: Guide as Summary
+    description: >
+      Writing a facilitator guide that describes what each segment is about
+      rather than giving the Human-in-Charge word-for-word instructions and
+      recovery moves. A guide that requires interpretation under pressure
+      is not a guide.
+  - name: Unconfirmed Synthesis
+    description: >
+      Distributing the session summary before the Human-in-Charge has confirmed
+      it. The agent's synthesis is a draft until the person who was in the room
+      verifies it.
+  - name: No Pre-Read
+    description: >
+      Skipping the pre-read or sending it less than 24 hours before the session.
+      Participants who arrive without preparation constrain the diverge phase
+      and extend the time needed for context-setting.
+notes: >
+  For remote or hybrid sessions, add 20% to the session design and guide-writing
+  time to account for tooling friction, reduced non-verbal signal, and the need
+  to make every instruction explicit in writing rather than demonstrable in person.
+  Remote sessions should be capped at 90 minutes per sitting; multi-hour workshops
+  should be split across sessions with async diverge work between them.
