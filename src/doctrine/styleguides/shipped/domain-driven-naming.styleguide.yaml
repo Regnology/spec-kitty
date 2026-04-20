@@ -1,0 +1,43 @@
+schema_version: "1.0"
+id: domain-driven-naming
+title: Domain-Driven Naming Styleguide
+scope: architecture
+principles:
+  - "Names should reveal domain intent, not implementation details. A good name answers 'what is this in the domain and why does it exist?' not 'what design pattern was used?'"
+  - "Use ubiquitous language: names should map directly to terms domain experts use in conversation. New developers should learn domain vocabulary by reading code."
+  - "Specificity over genericity: a name that describes the specific domain action ('OrderPricer', 'ShipmentTracker') is always preferable to a generic suffix ('Manager', 'Handler', 'Processor')."
+  - "Generic suffixes require justification: 'Manager', 'Handler', 'Helper', 'Utility', and 'Processor' in domain code must be accompanied by a documented reason. Infrastructure and framework code is exempt."
+  - "Bounded context awareness: the same term may have legitimately different meanings in different bounded contexts. Document translation layers rather than forcing a single global definition."
+  - "Names are architecture signals: terminology conflicts between teams are not communication problems to be resolved by consensus — they are signals of context boundaries to be mapped."
+  - "Domain verbs over nouns: when a concept is primarily a behaviour, a verb-form name ('Validator', 'Renderer', 'Reconciler') is clearer than a noun-form ('ValidationService', 'RenderingEngine', 'ReconciliationProcessor')."
+anti_patterns:
+  - name: Generic Manager
+    description: "'Manager' conceals responsibility. It can mean load, cache, validate, orchestrate, or anything else. Every use requires reading the implementation to understand the contract."
+    bad_example: "TemplateManager, UserManager, ConfigurationManager"
+    good_example: "TemplateRenderer (renders), TemplateCache (caches), UserAuthenticator (checks credentials), ConfigurationLoader (loads from files)"
+  - name: Generic Handler
+    description: "'Handler' implies event-driven processing but is frequently applied to regular method calls, making callers unable to infer the contract from the name alone."
+    bad_example: "TaskAssignmentHandler, RequestHandler, DataHandler"
+    good_example: "TaskAssigner, OrderProcessor (when processing orders is the domain action), DataTransformer"
+  - name: Generic Processor
+    description: "'Processor' says only that something enters and something exits. Every component processes something. The name carries no domain information."
+    bad_example: "DataProcessor, MessageProcessor, TaskProcessor"
+    good_example: "DataNormalizer, MessageRouter, TaskExecutor — each name describes the specific domain action"
+  - name: Helper and Utility Catchalls
+    description: "Classes named Helper or Utils accumulate unrelated functions and become impossible to reason about or test as coherent units."
+    bad_example: "StringHelper, DateUtils, FileHelper — each grows into a dumping ground"
+    good_example: "StringValidator, DateFormatter, FileReader / FileWriter — split by responsibility, moved to domain-specific modules"
+  - name: Implementation-Leaking Names
+    description: "Naming a concept after the design pattern used to implement it rather than the domain role it plays, coupling callers to implementation decisions."
+    bad_example: "AbstractBaseEntityFactoryBuilderStrategy"
+    good_example: "InvoiceGenerator — callers need not know it uses the Builder pattern internally"
+quality_test: >
+  Read the name aloud to a domain expert who has not seen the code.
+  Ask: what does this component do? If they cannot answer correctly from the name
+  alone, or if they ask 'what kind of managing?', the name needs revision.
+  For borderline cases: could a new team member predict the method signatures
+  from the class name? If not, the name is too generic.
+references:
+  - "src/doctrine/tactics/shipped/language-driven-design.tactic.yaml"
+  - "src/doctrine/tactics/shipped/bounded-context-identification.tactic.yaml"
+  - "src/doctrine/tactics/shipped/team-interaction-mapping.tactic.yaml"

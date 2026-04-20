@@ -1,0 +1,102 @@
+schema_version: "1.0"
+id: team-interaction-mapping
+name: Team Interaction Mapping
+purpose: >
+  Map organisational communication patterns to identify vocabulary clusters and
+  predict semantic boundaries, using Conway's Law as the analytical frame. Teams
+  that communicate frequently tend to develop shared vocabulary; teams that rarely
+  interact tend to develop divergent vocabulary for the same concepts. This
+  divergence is not a communication problem to be solved — it is an architectural
+  signal to be read. This tactic makes that signal explicit so that bounded context
+  boundaries can be drawn where they reflect the actual system of meaning, not the
+  assumed one.
+steps:
+  - title: List all teams and their primary responsibilities
+    description: >
+      Enumerate every team involved in or adjacent to the domain under analysis.
+      For each team record: team name, primary domain responsibility, and the
+      systems or artifacts they own or contribute to. Include product teams,
+      engineering teams, operations teams, and support teams. Do not pre-filter
+      for relevance — a team's absence from a vocabulary cluster is as informative
+      as its presence.
+    examples:
+      - "Team: Platform Engineering. Responsibility: infrastructure provisioning, deployment pipeline. Owns: CI/CD configuration, cloud resource definitions."
+      - "Team: Order Management. Responsibility: order lifecycle from placement to fulfilment. Owns: order service, order event stream."
+  - title: Document communication frequency and channels
+    description: >
+      For each pair of teams, record the frequency and nature of their interaction.
+      Use four bands: daily (stand-ups, shared channels, pair work), weekly
+      (planning, reviews), monthly (cross-team syncs, all-hands), and rarely
+      (occasional handoffs only). Note the channel type: synchronous meeting,
+      async message, shared document, shared codebase, or formal ticket/API boundary.
+      Shared artifacts (repositories, documentation, event streams) count as
+      communication channels.
+    examples:
+      - "Order Management ↔ Warehouse Operations: weekly sync + shared order event stream. Shared artifact: OrderPlaced event schema."
+      - "Platform Engineering ↔ Customer Support: rarely — formal ticket only. No shared artifacts."
+  - title: Identify vocabulary clusters per team
+    description: >
+      Ask each team to list 10–20 core domain terms: the concepts they use
+      daily in conversation, code, and documentation. Do not prompt with terms
+      from other teams. Collect independently, then compare. Record: terms used
+      consistently across teams, terms used by one team only, and terms used by
+      multiple teams with divergent or conflicting definitions.
+    examples:
+      - "Term 'Order': Order Management defines it as a confirmed purchase. Warehouse Operations defines it as a pick-and-pack instruction. Same word, different objects — boundary signal."
+      - "Term 'Customer': used by Sales, Support, and Billing with consistent meaning. No boundary signal from this term."
+  - title: Overlay vocabulary boundaries with team communication boundaries
+    description: >
+      Compare the vocabulary divergence map against the communication frequency
+      map. The hypothesis to test: where vocabulary diverges and communication is
+      infrequent, a bounded context boundary likely exists or should exist. Where
+      vocabulary is consistent and communication is frequent, the teams may belong
+      to the same bounded context. Document each candidate boundary as a hypothesis,
+      not a conclusion — validation with the teams is required.
+    examples:
+      - "Hypothesis: 'Order' in Order Management and 'Order' in Warehouse Operations are different bounded contexts. Evidence: different definitions, weekly sync only, formal event-schema API at the boundary."
+      - "Hypothesis: Sales and Customer Success share a 'Customer' context. Evidence: identical definition, daily interaction, shared CRM."
+  - title: Validate hypotheses with team feedback
+    description: >
+      Present each boundary hypothesis to the affected teams. Ask them to define
+      the shared term independently in writing, then compare the definitions
+      objectively. If definitions differ materially, the boundary hypothesis is
+      supported. If teams claim alignment but written definitions differ, the
+      boundary hypothesis is still supported — verbal alignment often conceals
+      semantic drift. Document outcomes: confirmed boundaries, rejected hypotheses,
+      and unresolved cases requiring further investigation.
+    examples:
+      - "Validation: Order Management and Warehouse each wrote their definition of 'Order'. Definitions differed on 8 of 12 attributes. Boundary confirmed."
+      - "Validation: Sales and Customer Success wrote identical definitions of 'Customer'. Boundary hypothesis rejected — shared context confirmed."
+references:
+  - name: Bounded Context Canvas Fill
+    type: tactic
+    id: bounded-context-canvas-fill
+    when: >
+      After boundaries are confirmed, use the bounded context canvas to document
+      each context's language, capabilities, and integration patterns.
+  - name: Language-Driven Design
+    type: tactic
+    id: language-driven-design
+    when: >
+      Once vocabulary clusters are mapped, apply language-driven design to ensure
+      code and system names reflect the bounded context's ubiquitous language.
+  - name: Stakeholder Alignment
+    type: tactic
+    id: stakeholder-alignment
+    when: >
+      When vocabulary divergence reveals competing definitions held by teams with
+      conflicting priorities, run stakeholder alignment before attempting to
+      resolve the terminology.
+failure_modes:
+  - "Prompting teams with other teams' vocabulary during the survey step — contaminates the independent vocabulary capture."
+  - "Treating verbal claims of alignment as validation — ask for written definitions and compare objectively."
+  - "Treating every vocabulary difference as a boundary — dialect variation within a shared context is normal; look for structural differences in meaning, not surface synonyms."
+  - "Skipping the validation step and treating hypotheses as confirmed boundaries — hypotheses must be tested before informing architectural decisions."
+  - "Ignoring Conway's Law violations — where team structure and desired architecture diverge, document the mismatch explicitly rather than forcing the architecture to fit the current org chart."
+notes: >
+  This tactic is most useful when starting a domain modelling effort, when
+  integration problems suggest misaligned understanding, or when a legacy system
+  is being decomposed and the existing module boundaries do not match how teams
+  actually think and talk. The output is a team interaction matrix, a vocabulary
+  ownership map, and a set of validated or candidate context boundary hypotheses.
+  These feed directly into bounded context canvas work and context mapping.

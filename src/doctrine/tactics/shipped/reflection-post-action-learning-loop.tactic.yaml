@@ -1,0 +1,94 @@
+schema_version: "1.0"
+id: reflection-post-action-learning-loop
+name: Reflection — Post-Action Learning Loop
+purpose: >
+  Capture learning after completing a task in order to improve future decisions,
+  tactics, and constraints. The value of execution is not only the deliverable but
+  the knowledge produced. Leaving that knowledge implicit — held only in the
+  executing agent's context or in the human's memory — means it cannot be applied
+  to the next task or the next agent. This tactic externalizes experience and
+  encodes it into the doctrine stack so that the organisation learns, not just
+  the individual.
+steps:
+  - title: Restate the original intent
+    description: >
+      Write one or two sentences describing what the task was meant to achieve,
+      in the terms used when it was commissioned — not in terms of what actually
+      happened. This step locks in the baseline against which outcomes will be
+      evaluated. If the original intent was ambiguous or shifted during execution,
+      record both the stated intent and the effective intent as understood mid-task.
+    examples:
+      - "Original intent: implement the audience-analysis tactic as a shippable YAML artifact conforming to the doctrine schema."
+      - "Original intent: produce a communication plan template covering all audience and event mapping fields needed by Programme Manager Morgan."
+  - title: Describe what actually happened
+    description: >
+      Record outcomes, process deviations, and challenges factually. Do not
+      interpret or justify yet — this is the extract phase. Include: what was
+      delivered, what was deferred, what unexpected problems arose, and how much
+      effort the task required relative to the estimate. Reference the
+      Analysis — Extract Before Interpret tactic to keep this step observational.
+    examples:
+      - "Delivered: tactic YAML. Deferred: step-level examples for two steps (time constraint). Unexpected: YAML parser rejected double-quoted strings containing single-quoted strings — required reformatting."
+      - "Delivered: template with all required sections. No deferred items. Unexpected: the reference template used a table format for desiderata that did not translate cleanly to the existing template conventions — chose column-reduced variant."
+  - title: Identify what worked
+    description: >
+      List 1–3 things that worked as expected or better. Be specific: name the
+      tactic, pattern, constraint, or decision that produced the positive outcome.
+      Vague praise ('good communication') cannot be reused.
+    examples:
+      - "Starting from the schema definition before writing content prevented all schema validation failures on first pass."
+      - "Reading the reference artifact in full before writing prevented structural duplication and surfaced the core intent more quickly than working from scratch."
+  - title: Identify what caused friction or failed
+    description: >
+      List 1–3 things that created unexpected work, produced errors, or required
+      rework. For each item, name the specific cause — not the symptom. Avoid
+      defensive framing. The goal is a reusable diagnosis, not an explanation.
+    examples:
+      - "Cause: tactic contained a mutual reference to a newly created sibling tactic, creating a cycle detected only at test time. Root cause: cycle detection is a test-phase gate, not a pre-write check."
+      - "Cause: YAML double-quote nesting produced a parse error on line 54. Root cause: example strings containing quoted speech were written without escaping inner quotes."
+  - title: Extract 1–3 concrete lessons
+    description: >
+      Distil the friction points and successes into lessons that are concrete and
+      actionable. A good lesson changes a future decision. It names a condition
+      ('when X') and a recommended response ('do Y' or 'avoid Z'). Vague lessons
+      ('be more careful') are not lessons — they are noise.
+    examples:
+      - "When creating two mutually relevant tactics simultaneously, check the reference graph for cycles before running tests. The cycle check is cheap and saves a test-fix-rerun cycle."
+      - "When writing YAML example strings that include quoted speech, use single quotes for inner quotation rather than escaped doubles. This prevents parse errors and is more readable."
+      - "When a reference artifact uses a richer template structure than the target schema supports, explicitly decide which sections to adapt rather than copy-translating — saves one revision cycle."
+  - title: Suggest where to encode each lesson
+    description: >
+      For each lesson extracted in step 5, identify the most appropriate encoding
+      location: a tactic update (add a failure_mode or note), a procedure step
+      (add an on_failure branch), a styleguide anti-pattern, a new template
+      constraint, or a directive. A lesson without an encoding target remains
+      ephemeral. Record the target even if the encoding action is deferred.
+    examples:
+      - "Lesson about YAML quote nesting → add as a note to the YAML-authoring section of any tactic-authoring procedure, or as a known failure mode in the doctrine authoring guide."
+      - "Lesson about mutual tactic references → add as a failure_mode to the relevant cross-referencing tactic or as a pre-commit check recommendation in the doctrine contribution guide."
+references:
+  - name: Analysis Extract Before Interpret
+    type: tactic
+    id: analysis-extract-before-interpret
+    when: >
+      Apply during steps 2 and 3 to ensure outcomes are described as facts
+      before causes or lessons are inferred.
+  - name: Premortem Risk Identification
+    type: tactic
+    id: premortem-risk-identification
+    when: >
+      The proactive counterpart to this tactic — run before a task to predict
+      failure modes; run this tactic after to compare predictions against actuals.
+failure_modes:
+  - "Vague lessons — 'we should communicate better' is not a lesson. Name the specific condition and the specific change."
+  - "Retrospective justification — defending the decisions made rather than evaluating their outcomes. Symptoms: lessons that conclude 'we were right'."
+  - "Failing to name an encoding target — a lesson without a home in the doctrine stack cannot be found by the next agent."
+  - "Extracting more than three lessons — diffuses focus and reduces the likelihood that any lesson is actually encoded."
+  - "Running the loop on trivial tasks — reflection cost exceeds learning value for routine, low-variance work."
+notes: >
+  This tactic is most valuable after: completing significant or novel work,
+  encountering unexpected challenges, discovering gaps in existing guidance,
+  and after any task where the first approach was abandoned in favour of a second.
+  It is the written counterpart to a spoken retrospective — shorter, agent-executable,
+  and targeted at doctrine improvement rather than team process improvement.
+  The output is a short reflection document, not a report.

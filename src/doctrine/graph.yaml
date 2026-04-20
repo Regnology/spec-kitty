@@ -109,6 +109,9 @@ nodes:
 - urn: procedure:situational-assessment
   kind: procedure
   label: Situational Assessment
+- urn: procedure:target-audience-fit
+  kind: procedure
+  label: Target-Audience Fit
 - urn: procedure:test-first-bug-fixing
   kind: procedure
   label: Test-First Bug Fixing
@@ -136,6 +139,9 @@ nodes:
 - urn: styleguide:kitty-glossary-writing
   kind: styleguide
   label: Kitty Glossary Writing Styleguide
+- urn: styleguide:domain-driven-naming
+  kind: styleguide
+  label: Domain-Driven Naming Styleguide
 - urn: styleguide:python-conventions
   kind: styleguide
   label: Python Conventions Styleguide
@@ -356,9 +362,15 @@ nodes:
 - urn: tactic:meeting-facilitation
   kind: tactic
   label: Meeting Facilitation
+- urn: tactic:reflection-post-action-learning-loop
+  kind: tactic
+  label: Reflection — Post-Action Learning Loop
 - urn: tactic:retrospective
   kind: tactic
   label: Retrospective
+- urn: tactic:team-interaction-mapping
+  kind: tactic
+  label: Team Interaction Mapping
 - urn: tactic:communication-plan
   kind: tactic
   label: Communication Plan
@@ -1252,4 +1264,37 @@ edges:
   relation: requires
 - source: procedure:lexical-analysis
   target: styleguide:caveman-response-mode
+  relation: requires
+- source: tactic:reflection-post-action-learning-loop
+  target: tactic:analysis-extract-before-interpret
+  relation: requires
+- source: tactic:reflection-post-action-learning-loop
+  target: tactic:premortem-risk-identification
+  relation: requires
+- source: tactic:team-interaction-mapping
+  target: tactic:bounded-context-canvas-fill
+  relation: requires
+- source: tactic:team-interaction-mapping
+  target: tactic:language-driven-design
+  relation: requires
+- source: tactic:team-interaction-mapping
+  target: tactic:stakeholder-alignment
+  relation: requires
+- source: styleguide:domain-driven-naming
+  target: tactic:language-driven-design
+  relation: requires
+- source: styleguide:domain-driven-naming
+  target: tactic:bounded-context-identification
+  relation: requires
+- source: styleguide:domain-driven-naming
+  target: tactic:team-interaction-mapping
+  relation: requires
+- source: procedure:target-audience-fit
+  target: tactic:audience-analysis
+  relation: requires
+- source: procedure:target-audience-fit
+  target: tactic:message-framing
+  relation: requires
+- source: procedure:target-audience-fit
+  target: styleguide:audience-aware-writing
   relation: requires

@@ -1,0 +1,127 @@
+schema_version: "1.0"
+id: target-audience-fit
+name: Target-Audience Fit
+purpose: >
+  Apply audience analysis systematically during writing and revision so that every
+  artifact intentionally addresses a specific reader rather than a generic 'user'.
+  Tone, depth, vocabulary, structure, and call-to-action all vary by audience.
+  This procedure translates the output of audience analysis into concrete writing
+  decisions and validates those decisions before the artifact is distributed.
+  Without it, authors default to writing for themselves — the most available
+  but least representative audience.
+entry_condition: >
+  An artifact (document, report, specification, guide, communication) is being
+  created or substantially revised. The intended audience segments are known or
+  can be established before writing begins.
+exit_condition: >
+  The artifact has been drafted or revised with explicit audience alignment decisions
+  recorded. At least one person matching the target audience profile has validated
+  that the artifact meets their information needs. Alignment decisions are logged
+  for future revision reference.
+steps:
+  - title: Identify reader segments
+    description: >
+      Determine which audience persona(s) the artifact must serve. Where a matching
+      persona exists in the doctrine or project templates, reference it explicitly.
+      Where no existing persona fits, draft a minimal persona covering: role,
+      prior knowledge level, primary need from this artifact, and preferred
+      format and channel. Flag it for curator follow-up rather than proceeding
+      without a persona. Do not write for 'everyone' — if the artifact genuinely
+      serves multiple distinct segments, name them all.
+    actor: agent
+    on_success: Identified segments and persona references recorded; proceed to context load.
+    on_failure: Pause and request audience clarification from the requester before proceeding.
+  - title: Load persona context
+    description: >
+      For each identified segment, load the relevant audience persona — goals,
+      prior knowledge, frustrations, preferred channel, and behavioral cues.
+      Identify the one or two needs that this specific artifact must address.
+      Record these as explicit writing constraints: 'This document must not assume
+      knowledge of X', 'This document must lead with the business impact before
+      the technical detail', 'This document must end with a single clear action'.
+      These constraints are the working contract for the drafting step.
+    actor: agent
+    on_success: Writing constraints documented per segment.
+  - title: Plan for multiple audiences
+    description: >
+      Decide whether a single artifact with signposted sections suffices, or
+      whether multiple variants are required. Split content when audience needs
+      diverge sharply — for example, an executive summary and a technical
+      appendix serve the same initiative but different readers. Attempting to
+      address conflicting depth requirements in one unstructured document forces
+      excessive caveats and satisfies neither audience. Record the decision and
+      the rationale.
+    actor: agent
+    on_success: Structure decision made (unified with sections / multiple variants).
+  - title: Draft or revise with audience filters active
+    description: >
+      While drafting, apply the writing constraints from step 2 as active filters.
+      At each paragraph boundary ask: does this help the target persona address
+      their stated need? Does it use vocabulary they can be expected to know?
+      Does the structure match their preferred reading pattern (conclusion-first
+      for decision-makers; context-first for operators)? Flag any paragraph that
+      does not pass the filter rather than deleting it immediately — it may belong
+      in a different section or a separate document for a different audience.
+    actor: agent
+    on_success: Draft produced with flagged sections resolved or deferred.
+  - title: Validate against persona
+    description: >
+      Before distribution, validate the artifact against the audience persona.
+      Preferred method: show the artifact to one person matching the target
+      audience profile and ask two questions: (1) What is the single most important
+      thing this document is telling you? (2) What are you expected to do as a
+      result? If they cannot answer both correctly after one reading, the artifact
+      requires revision. If a live reader is unavailable, apply the Audience-Aware
+      Writing quality test as a proxy.
+    actor: human
+    on_success: Validation passed; proceed to log and distribute.
+    on_failure: Return to step 4 with specific feedback from validation; revise targeted sections only.
+  - title: Log audience alignment decisions
+    description: >
+      Record in the artifact's metadata, cover note, or work log: which personas
+      were targeted, how the artifact addresses each persona's primary need, and
+      any deviations or new insights for persona maintenance. This log enables
+      future editors to make consistent revision decisions without re-running the
+      full procedure. If the persona revealed a gap (a need not addressed, an
+      audience not currently served), flag it for follow-up.
+    actor: agent
+anti_patterns:
+  - name: Writing for yourself
+    description: >
+      Defaulting to the author's own vocabulary, depth level, and preferred
+      structure without considering whether the reader shares those preferences.
+      Symptoms: document uses unexplained jargon, buries the conclusion, or
+      provides far more background than the target audience needs.
+  - name: Skipping the persona load
+    description: >
+      Naming the audience segment at step 1 but not loading the persona detail
+      before drafting. This produces documents that address a label ('executives')
+      rather than a specific set of needs, frustrations, and behavioral cues.
+  - name: Forcing multiple audiences into one structure
+    description: >
+      Attempting to serve audiences with conflicting depth requirements in a single
+      unstructured document, resulting in a text too shallow for practitioners and
+      too detailed for decision-makers. Split or signpost explicitly.
+  - name: Skipping validation
+    description: >
+      Distributing without any audience validation, relying on the author's own
+      assessment that the artifact is clear. The author is the worst judge of
+      clarity because they cannot unknow what they know.
+references:
+  - type: tactic
+    id: audience-analysis
+    reason: Provides the analytical foundation — persona identification, prior knowledge, and information needs — that this procedure operationalises during writing.
+  - type: tactic
+    id: message-framing
+    reason: Applied in step 4 to structure each message for the target audience's context and reception.
+  - type: styleguide
+    id: audience-aware-writing
+    reason: Defines the writing principles enforced as active filters during step 4.
+  - type: template
+    id: audience-persona-template
+    reason: The canonical format for persona artifacts referenced in steps 1 and 2.
+notes: >
+  This procedure is most valuable for artifacts intended for external stakeholders,
+  senior decision-makers, or audiences with significantly different background knowledge
+  from the author. For internal working documents between peers, applying the
+  audience-analysis tactic directly (without the full procedure lifecycle) is sufficient.
