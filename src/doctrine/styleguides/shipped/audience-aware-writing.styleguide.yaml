@@ -1,0 +1,42 @@
+schema_version: "1.0"
+id: audience-aware-writing
+title: Audience-Aware Writing Styleguide
+scope: docs
+principles:
+  - "Write for the reader, not the writer: the measure of a good message is whether the intended audience understood it correctly, not whether it was technically accurate."
+  - "Establish prior knowledge before adding new information: do not build on concepts the audience has not been given."
+  - "One audience per document: when a document must serve multiple audiences, use clearly labelled sections. Do not blend audience levels within a single passage."
+  - "Lead with what the reader needs, not with how you arrived at it: put context after conclusions for decision-making audiences; context before conclusions for operational audiences who must act on the full picture."
+  - "Vocabulary is a contract: define terms on first use, use them consistently, and never use the same word for two different concepts in the same document."
+  - "Concrete before abstract: anchor abstract claims with specific examples before generalising. Abstractions without examples are untestable assertions."
+  - "Active voice signals ownership: use active voice to indicate who is responsible for what. Passive voice obscures accountability and is appropriate only when the actor is genuinely unknown or irrelevant."
+  - "Length is a function of the reader's need, not the writer's effort: a one-page summary is not a lesser artefact than a ten-page report. Match length to the audience's available attention and required depth."
+anti_patterns:
+  - name: Expertise Bleed
+    description: "Assuming the audience shares the author's specialist vocabulary without establishing it first."
+    bad_example: "The system uses an event-sourced CQRS architecture with eventual consistency guarantees at the aggregate boundary."
+    good_example: "The system records every change as an immutable event (event sourcing) and separates read and write operations (CQRS). This means the data you read may be a few milliseconds behind the latest write — this is intentional and within the agreed consistency boundary."
+  - name: Buried Lead
+    description: "Placing the key conclusion or action after several paragraphs of context that the audience does not need before the conclusion."
+    bad_example: "Over the past three months, the team has evaluated five approaches to API versioning... [three paragraphs] ...we recommend URL path versioning."
+    good_example: "We recommend URL path versioning. Here is why we chose it over the four alternatives we evaluated."
+  - name: Hedge Stacking
+    description: "Accumulating qualifiers to the point where no claim can be extracted from the sentence."
+    bad_example: "It may be worth considering whether it might be appropriate to potentially explore options for improving the current approach."
+    good_example: "We should evaluate three options for improving the current approach. I recommend we decide by the end of the week."
+  - name: False Universality
+    description: "Writing 'we' or 'the team' when only one segment is affected, causing others to misread the action as applying to them."
+    bad_example: "We will need to update the deployment scripts."
+    good_example: "The platform team will update the deployment scripts. No action is required from product teams."
+  - name: Implicit Call to Action
+    description: "Ending a document or message without stating explicitly what the audience should do, decide, or believe."
+    bad_example: "These are the three options. Let me know your thoughts."
+    good_example: "Please review the three options and confirm your preferred choice by Thursday. If no preference is indicated by Thursday, we will proceed with Option 2."
+quality_test: >
+  Show the document to someone who matches the target audience profile but was not
+  involved in writing it. Ask them: What is the single most important thing this
+  document is telling you? What are you expected to do as a result? If they cannot
+  answer both questions correctly after one reading, the document requires revision.
+references:
+  - "src/doctrine/tactics/shipped/audience-analysis.tactic.yaml"
+  - "src/doctrine/tactics/shipped/message-framing.tactic.yaml"

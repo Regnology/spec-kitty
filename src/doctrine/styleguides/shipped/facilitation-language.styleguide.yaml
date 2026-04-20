@@ -1,0 +1,38 @@
+schema_version: "1.0"
+id: facilitation-language
+title: Facilitation Language Styleguide
+scope: docs
+principles:
+  - "Separate the role from the content: a facilitator's job is to make it easier for others to think and decide, not to advance their own position. Use language that creates space, not language that closes it."
+  - "Invite, do not direct: frame contributions as invitations rather than instructions. 'What do you think about X?' invites; 'Tell me what you think about X' commands."
+  - "Name the process, not the person: when redirecting behaviour, reference the session agreement or goal, not the individual. 'We agreed to stay in scope for this segment' instead of 'You're going off-topic'."
+  - "Summarise to confirm, not to interpret: when capturing a contribution, repeat back the substance in neutral language before recording it. Interpretation disguised as summary is a common facilitation failure."
+  - "Make silence visible: when a group goes quiet, name the silence and give it a frame before filling it. 'There's a pause — is anyone working through a thought they'd like to share?' creates space; immediately filling silence erases it."
+  - "Parking lot language is neutral: when deferring a topic, acknowledge its legitimacy before parking it. 'That's an important question — let's capture it here so we make sure it gets addressed' is different from 'That's out of scope'."
+  - "Questions before statements: in facilitated sessions, a question that draws out a participant's reasoning is more powerful than a statement from the facilitator that asserts a conclusion."
+  - "Emotional temperature language is explicit: name group emotional states when they are affecting the session. 'I'm noticing some tension in the room around this topic — would it help to take two minutes before we continue?' is facilitation; ignoring the temperature is suppression."
+anti_patterns:
+  - name: Leading Question
+    description: "Framing a question in a way that steers toward a pre-determined answer, undermining the participant's sense that their input matters."
+    bad_example: "Don't you think Option A is the more pragmatic choice here?"
+    good_example: "What factors are most important to you when evaluating these options?"
+  - name: Summary as Interpretation
+    description: "Rephrasing a participant's contribution in a way that changes its meaning, then recording the facilitator's version."
+    bad_example: "So what you're saying is that the deadline is unrealistic. (when the participant said they were concerned about the deadline)"
+    good_example: "You said you're concerned about the deadline — is that right? Can you say more about what's driving that concern?"
+  - name: Facilitator Opinion Injection
+    description: "Offering the facilitator's own view on a substantive topic, collapsing the distinction between facilitator and participant."
+    bad_example: "Personally I think the second option is stronger, but let's see what others think."
+    good_example: "We've heard two different perspectives — are there other views on this before we move to a decision?"
+  - name: False Consensus
+    description: "Declaring alignment before it has been genuinely established, typically by asking a yes/no question to a group under social pressure."
+    bad_example: "So we're all agreed then? (asked to a group that has just stopped arguing)"
+    good_example: "Before we close this point — can everyone indicate whether they can live with this decision, even if it wasn't their first choice?"
+quality_test: >
+  Review the facilitated session transcript or notes. Count how many statements the
+  facilitator made versus questions they asked. In a well-facilitated session,
+  questions should significantly outnumber statements. If the facilitator's voice
+  dominates the record, the session was presentation, not facilitation.
+references:
+  - "src/doctrine/tactics/shipped/meeting-facilitation.tactic.yaml"
+  - "src/doctrine/tactics/shipped/stakeholder-alignment.tactic.yaml"
