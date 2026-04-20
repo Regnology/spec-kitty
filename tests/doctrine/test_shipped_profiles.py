@@ -24,15 +24,18 @@ SHIPPED_DIR = Path(__file__).parent.parent.parent / "src" / "doctrine" / "agent_
 
 EXPECTED_PROFILE_IDS = {
     "architect",
+    "communicator",
+    "curator",
     "designer",
+    "facilitator",
     "generic-agent",
     "human-in-charge",
     "implementer",
     "planner",
+    "programme-manager",
     "python-implementer",
     "researcher",
     "reviewer",
-    "curator",
 }
 
 # Sentinel profiles are workflow markers, not real agents.  They intentionally

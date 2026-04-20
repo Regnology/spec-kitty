@@ -43,6 +43,7 @@ ARTIFACT_DIRS: dict[str, list[tuple[Path, str]]] = {
     ],
     "directive": [(DOCTRINE_DIR / "directives" / d, "*.directive.yaml") for d in _SHIPPED_SUBDIRS],
     "toolguide": [(DOCTRINE_DIR / "toolguides" / d, "*.toolguide.yaml") for d in _SHIPPED_SUBDIRS],
+    "procedure": [(DOCTRINE_DIR / "procedures" / d, "*.procedure.yaml") for d in _SHIPPED_SUBDIRS],
     "template": [(_TEMPLATES_DIR, "**/*.md")],
 }
 
