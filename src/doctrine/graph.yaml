@@ -85,6 +85,9 @@ nodes:
 - urn: paradigm:specification-by-example
   kind: paradigm
   label: Specification by Example
+- urn: paradigm:human-centred-communication
+  kind: paradigm
+  label: Human-Centred Communication
 - urn: procedure:documentation-gap-prioritization
   kind: procedure
   label: Documentation Gap Prioritization
@@ -109,9 +112,24 @@ nodes:
 - urn: procedure:test-first-bug-fixing
   kind: procedure
   label: Test-First Bug Fixing
+- urn: procedure:stakeholder-communication-planning
+  kind: procedure
+  label: Stakeholder Communication Planning
+- urn: procedure:workshop-facilitation
+  kind: procedure
+  label: Workshop Facilitation
 - urn: styleguide:aggregate-design-rules
   kind: styleguide
   label: Aggregate Design Rules
+- urn: styleguide:audience-aware-writing
+  kind: styleguide
+  label: Audience-Aware Writing Styleguide
+- urn: styleguide:caveman-response-mode
+  kind: styleguide
+  label: Caveman Response Mode Styleguide
+- urn: styleguide:facilitation-language
+  kind: styleguide
+  label: Facilitation Language Styleguide
 - urn: styleguide:kitty-glossary-writing
   kind: styleguide
   label: Kitty Glossary Writing Styleguide
@@ -320,6 +338,27 @@ nodes:
 - urn: tactic:zombies-tdd
   kind: tactic
   label: ZOMBIES TDD
+- urn: tactic:audience-analysis
+  kind: tactic
+  label: Audience Analysis
+- urn: tactic:message-framing
+  kind: tactic
+  label: Message Framing
+- urn: tactic:meeting-facilitation
+  kind: tactic
+  label: Meeting Facilitation
+- urn: tactic:retrospective
+  kind: tactic
+  label: Retrospective
+- urn: tactic:communication-plan
+  kind: tactic
+  label: Communication Plan
+- urn: tactic:change-management-comms
+  kind: tactic
+  label: Change Management Communications
+- urn: tactic:session-output-synthesis
+  kind: tactic
+  label: Session Output Synthesis
 - urn: toolguide:contextive
   kind: toolguide
   label: Contextive
@@ -1089,4 +1128,95 @@ edges:
   relation: requires
 - source: directive:DIRECTIVE_037
   target: tactic:usage-examples-sync
+  relation: requires
+# --- Human-Centred Communication cluster ---
+- source: paradigm:human-centred-communication
+  target: tactic:audience-analysis
+  relation: requires
+- source: paradigm:human-centred-communication
+  target: tactic:message-framing
+  relation: requires
+- source: paradigm:human-centred-communication
+  target: styleguide:audience-aware-writing
+  relation: requires
+- source: tactic:message-framing
+  target: tactic:audience-analysis
+  relation: requires
+- source: tactic:communication-plan
+  target: tactic:audience-analysis
+  relation: requires
+- source: tactic:communication-plan
+  target: tactic:message-framing
+  relation: requires
+- source: tactic:communication-plan
+  target: tactic:stakeholder-alignment
+  relation: requires
+- source: tactic:change-management-comms
+  target: tactic:audience-analysis
+  relation: requires
+- source: tactic:change-management-comms
+  target: tactic:message-framing
+  relation: requires
+- source: tactic:change-management-comms
+  target: tactic:stakeholder-alignment
+  relation: requires
+- source: tactic:change-management-comms
+  target: tactic:communication-plan
+  relation: requires
+- source: tactic:meeting-facilitation
+  target: tactic:audience-analysis
+  relation: requires
+- source: tactic:meeting-facilitation
+  target: tactic:stakeholder-alignment
+  relation: requires
+- source: tactic:retrospective
+  target: tactic:premortem-risk-identification
+  relation: requires
+- source: tactic:retrospective
+  target: tactic:eisenhower-prioritisation
+  relation: requires
+- source: tactic:retrospective
+  target: tactic:stopping-conditions
+  relation: requires
+- source: procedure:stakeholder-communication-planning
+  target: tactic:audience-analysis
+  relation: requires
+- source: procedure:stakeholder-communication-planning
+  target: tactic:message-framing
+  relation: requires
+- source: procedure:stakeholder-communication-planning
+  target: tactic:stakeholder-alignment
+  relation: requires
+- source: procedure:stakeholder-communication-planning
+  target: tactic:communication-plan
+  relation: requires
+- source: procedure:stakeholder-communication-planning
+  target: tactic:change-management-comms
+  relation: requires
+- source: procedure:workshop-facilitation
+  target: tactic:audience-analysis
+  relation: requires
+- source: procedure:workshop-facilitation
+  target: tactic:meeting-facilitation
+  relation: requires
+- source: procedure:workshop-facilitation
+  target: tactic:stakeholder-alignment
+  relation: requires
+- source: procedure:workshop-facilitation
+  target: tactic:problem-decomposition
+  relation: requires
+- source: procedure:workshop-facilitation
+  target: tactic:session-output-synthesis
+  relation: requires
+- source: procedure:workshop-facilitation
+  target: styleguide:facilitation-language
+  relation: requires
+- source: tactic:session-output-synthesis
+  target: tactic:meeting-facilitation
+  relation: requires
+- source: styleguide:caveman-response-mode
+  target: tactic:message-framing
+  relation: requires
+- source: styleguide:caveman-response-mode
+  target: styleguide:audience-aware-writing
   relation: requires
