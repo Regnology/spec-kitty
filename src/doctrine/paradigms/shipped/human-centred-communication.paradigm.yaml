@@ -1,0 +1,19 @@
+schema_version: "1.0"
+id: human-centred-communication
+name: Human-Centred Communication
+summary: >
+  Communication designed from the receiver's perspective rather than the sender's.
+  Every message, document, meeting, and process artefact begins with three questions:
+  Who will receive this? What do they already know and need? What action or understanding
+  should result? Content, structure, vocabulary, channel, and timing are all derived
+  from the answers to these questions, not from the sender's convenience or
+  expertise level.
+
+  In practice this means: audience analysis precedes drafting, message structure is
+  chosen to match the receiver's decision context (not the sender's narrative arc),
+  feedback loops are designed into every significant communication, and the measure
+  of success is the receiver's understanding and behaviour change — not the sender's
+  sense of completeness.
+
+  Human-centred communication does not mean simplification or the removal of
+  precision. It means placing precision where the audience can use it.
