@@ -1,0 +1,73 @@
+schema_version: "1.0"
+id: analysis-extract-before-interpret
+name: Analysis — Extract Before Interpret
+purpose: >
+  Prevent premature interpretation by first extracting observable facts and patterns
+  from source material before assigning meaning, causation, or recommendations.
+  Collapsing extraction and interpretation into a single step is the most common
+  source of analytical bias: the analyst unconsciously selects evidence that supports
+  an already-formed conclusion. Keeping extraction separate creates a shared factual
+  foundation that any reviewer can audit before divergent reasoning begins.
+steps:
+  - title: Identify source material and scope
+    description: >
+      Name the artifact(s) to be analyzed: code, log output, text, data, examples,
+      conversation transcript. Define the boundaries explicitly — what is in scope
+      and what is not. Record this scope statement before proceeding. If scope is
+      unclear, resolve it before extraction begins.
+    examples:
+      - "In scope: the three paragraphs of the requirements document under 'Non-Functional Requirements'. Out of scope: the implementation notes appended by the engineering team."
+      - "In scope: log lines between 14:02 and 14:07 on 2026-04-18. Out of scope: lines from other services in the same timeframe."
+  - title: Extract observable elements verbatim
+    description: >
+      Copy, quote, or transcribe elements directly from the source without paraphrase
+      or normalization. Preserve the original language, identifiers, and structure.
+      Do not rename concepts, do not group by inferred category, do not omit elements
+      because they seem irrelevant. An element's relevance is determined during
+      interpretation, not extraction.
+    examples:
+      - "Quoted verbatim: 'The system must respond within 2 seconds under normal load.' — do not normalize to 'performance requirement: <2s'."
+      - "Log entry extracted as-is: 'ERROR 2026-04-18T14:03:12Z [auth-service] token validation failed: claim exp missing'."
+  - title: Organize into a neutral structure
+    description: >
+      Arrange extracted elements into a list, table, or structured document that
+      imposes order without imposing interpretation. Use source-neutral labels:
+      'Occurrence', 'Statement', 'Pattern', 'Value' — not 'Problem', 'Risk',
+      'Insight'. Group only by observable attributes (e.g. location in source,
+      type of construct, frequency) rather than by inferred meaning.
+  - title: Label the output as extraction only
+    description: >
+      Mark the completed extraction artifact with an explicit header or note:
+      "Extraction only — no interpretation. Source references preserved."
+      This makes the boundary visible to any collaborator or reviewer who consumes
+      the artifact later. Do not proceed to interpretation until the extraction is
+      complete enough to support it.
+  - title: Proceed to interpretation as a distinct step
+    description: >
+      Only after the extraction artifact is complete, begin a separate interpretation
+      pass. Reference the extraction artifact rather than the source material directly.
+      If new observations surface during interpretation that are not in the extraction,
+      pause, add them to the extraction artifact, then continue. Never amend
+      the extraction retroactively to match the interpretation.
+    examples:
+      - "Interpretation step: Of the 14 extracted error log entries, 11 share the same root cause (missing exp claim). This suggests the token minting service is not setting the expiry field."
+      - "Interpretation step: Three of the five requirements use the phrase 'acceptable performance' without a measurable threshold. These are ambiguity risks."
+references:
+  - name: Review Intent and Risk First
+    type: tactic
+    id: review-intent-and-risk-first
+    when: >
+      When performing a code review: use extract-before-interpret to capture
+      observable patterns before assigning intent or risk ratings.
+failure_modes:
+  - "Collapsing extraction and interpretation into one step — the most common failure; produces conclusions without auditable evidence."
+  - "Renaming or normalizing extracted data prematurely — 'timeout error' becomes 'performance issue' before a pattern is established."
+  - "Omitting observations that seem irrelevant — relevance is an interpretation; record and filter later."
+  - "Adding inferred meaning to the extraction artifact — labels like 'critical bug' or 'design flaw' belong in the interpretation pass, not the extraction."
+  - "Amending the extraction retroactively to align with the interpretation — this destroys the audit trail."
+notes: >
+  This tactic creates a shared factual foundation before reasoning diverges.
+  It pairs with any tactic or procedure that involves analysis: code review,
+  log analysis, requirements validation, lexical diagnosis, and retrospective
+  synthesis. In multi-agent workflows it enables independent verification:
+  one agent extracts, another interprets, a reviewer audits the gap between them.

@@ -118,6 +118,9 @@ nodes:
 - urn: procedure:workshop-facilitation
   kind: procedure
   label: Workshop Facilitation
+- urn: procedure:lexical-analysis
+  kind: procedure
+  label: Lexical Analysis
 - urn: styleguide:aggregate-design-rules
   kind: styleguide
   label: Aggregate Design Rules
@@ -228,6 +231,9 @@ nodes:
 - urn: tactic:language-driven-design
   kind: tactic
   label: Language-Driven Design
+- urn: tactic:lexical-style-diagnostic
+  kind: tactic
+  label: Lexical Style Diagnostic
 - urn: tactic:usage-examples-sync
   kind: tactic
   label: Usage Examples Sync
@@ -338,6 +344,9 @@ nodes:
 - urn: tactic:zombies-tdd
   kind: tactic
   label: ZOMBIES TDD
+- urn: tactic:analysis-extract-before-interpret
+  kind: tactic
+  label: Analysis — Extract Before Interpret
 - urn: tactic:audience-analysis
   kind: tactic
   label: Audience Analysis
@@ -1219,4 +1228,28 @@ edges:
   relation: requires
 - source: styleguide:caveman-response-mode
   target: styleguide:audience-aware-writing
+  relation: requires
+- source: tactic:lexical-style-diagnostic
+  target: styleguide:audience-aware-writing
+  relation: requires
+- source: tactic:lexical-style-diagnostic
+  target: tactic:analysis-extract-before-interpret
+  relation: requires
+- source: tactic:lexical-style-diagnostic
+  target: tactic:message-framing
+  relation: requires
+- source: tactic:analysis-extract-before-interpret
+  target: tactic:review-intent-and-risk-first
+  relation: requires
+- source: procedure:lexical-analysis
+  target: tactic:lexical-style-diagnostic
+  relation: requires
+- source: procedure:lexical-analysis
+  target: tactic:analysis-extract-before-interpret
+  relation: requires
+- source: procedure:lexical-analysis
+  target: styleguide:audience-aware-writing
+  relation: requires
+- source: procedure:lexical-analysis
+  target: styleguide:caveman-response-mode
   relation: requires

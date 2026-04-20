@@ -1,0 +1,111 @@
+schema_version: "1.0"
+id: lexical-analysis
+name: Lexical Analysis
+purpose: >
+  Run a structured end-to-end diagnostic pass on a written artifact — from intake
+  through diagnosis, prioritised revision, and output record — to improve clarity,
+  consistency, and audience fit. This procedure wraps the Lexical Style Diagnostic
+  tactic in a full lifecycle so that the editorial process is reproducible, auditable,
+  and preserves the author's voice. It applies the extract-before-interpret principle:
+  all observations are recorded before any recommendations are written.
+entry_condition: >
+  A written artifact (documentation, specification, report, communication, guide)
+  has been identified for editorial review. The intended audience and purpose of
+  the artifact are known, or can be established before the diagnostic begins.
+exit_condition: >
+  A revision artifact exists that records: the original text, all findings from the
+  diagnostic (categorized and prioritized), the minimal-diff changes applied, and
+  a post-revision summary confirming that critical findings were addressed. The
+  revised artifact has been acknowledged by the requester.
+steps:
+  - title: Intake — establish artifact context
+    description: >
+      Before reading the content, record: (1) the artifact's intended audience and
+      purpose; (2) the desired register (formal, technical, instructional, conversational);
+      (3) any known constraints (word count, accessibility requirements, house style);
+      (4) the requestor's goal (light polish, structural rework, tone alignment, or
+      full editorial review). This context scopes every subsequent decision. Without
+      it, the diagnostic produces generic observations that may not apply to this
+      artifact's actual use.
+    actor: human
+    on_success: Proceed to extraction pass with documented context.
+    on_failure: Pause and request missing context from requester before proceeding.
+  - title: Extraction pass — observe without interpreting
+    description: >
+      Apply the Analysis — Extract Before Interpret tactic to the artifact. Read the
+      full text once and record observable facts only: flagged sentences (length,
+      passive voice, clause depth), vocabulary items, heading structure, paragraph
+      lengths. Do not form conclusions or draft edits. Label this output as
+      "extraction only". This pass must complete before step 3 begins.
+    actor: agent
+    on_success: Extraction artifact complete; proceed to diagnostic.
+  - title: Diagnostic pass — apply Lexical Style Diagnostic
+    description: >
+      Apply all five steps of the Lexical Style Diagnostic tactic to the extraction
+      artifact: sentence structure scan, tone consistency check, readability
+      assessment, style issue identification, and recommendation generation.
+      Each finding must reference the source location (section or sentence).
+      Recommendations are proposals only — the human decides which to accept.
+    actor: agent
+    on_success: Diagnostic report complete with prioritised findings.
+  - title: Review findings with requester
+    description: >
+      Present the diagnostic report to the requester. Walk through critical findings
+      (clarity blockers, tone breaks) first, then lower-priority items. Confirm which
+      recommendations the requester accepts, defers, or declines. Record decisions.
+      Do not apply any change that the requester has not explicitly accepted.
+    actor: human
+    on_success: Accepted changes list agreed; proceed to revision.
+    on_failure: Return to diagnostic if findings are contested or misunderstood.
+  - title: Apply minimal-diff revision
+    description: >
+      Apply only the accepted recommendations as the smallest viable diff: change
+      the flagged construct, preserve surrounding text, do not refactor passages
+      that were not flagged. After applying all accepted changes, re-read the revised
+      artifact from start to finish to verify that edits did not introduce new
+      inconsistencies. Record a brief post-revision summary: what was changed and why.
+    actor: agent
+    on_success: Revised artifact and summary produced; proceed to handoff.
+  - title: Handoff and record
+    description: >
+      Deliver the revised artifact alongside the post-revision summary and the
+      original diagnostic report. Archive both the original and revised versions
+      if the document is long-lived. Confirm with the requester that the output
+      meets their stated goal from step 1.
+    actor: agent
+anti_patterns:
+  - name: Diagnostic and revision in one pass
+    description: >
+      Reading the text and rewriting it simultaneously. This produces edits that fix
+      obvious surface issues while leaving structural problems untouched, because the
+      reviewer's attention is divided.
+  - name: Scope creep during revision
+    description: >
+      Rewriting passages that were not flagged in the diagnostic — improving clarity
+      in one area while changing voice or introducing new inconsistencies in adjacent
+      text. Every change not in the accepted findings list requires explicit requester
+      approval.
+  - name: Skipping requester review
+    description: >
+      Applying all recommendations without human validation. The diagnostic produces
+      proposals, not mandates. Applying unreviewed changes to documentation, especially
+      external-facing content, risks changing meaning or tone in ways the requester
+      did not intend.
+references:
+  - type: tactic
+    id: lexical-style-diagnostic
+    reason: Core diagnostic tactic applied in step 3.
+  - type: tactic
+    id: analysis-extract-before-interpret
+    reason: Governs the extraction pass in step 2, separating observation from recommendation.
+  - type: styleguide
+    id: audience-aware-writing
+    reason: Defines the target principles against which tone and register are assessed.
+  - type: styleguide
+    id: caveman-response-mode
+    reason: Reference register for brevity diagnostics when compact communication is the target mode.
+notes: >
+  This procedure is most valuable for artifacts that will be read by external
+  stakeholders, published publicly, or reused across multiple audiences. For
+  quick internal notes or single-use messages, applying the Lexical Style Diagnostic
+  tactic directly (without the full procedure lifecycle) is sufficient.

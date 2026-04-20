@@ -1,0 +1,84 @@
+schema_version: "1.0"
+id: lexical-style-diagnostic
+name: Lexical Style Diagnostic
+purpose: >
+  Perform a systematic diagnostic pass on a piece of writing to identify style
+  inconsistencies, readability problems, and tone misalignments before revision
+  begins. The diagnostic separates observation from prescription: findings are
+  recorded as facts first; recommendations are issued only after the full picture
+  is established. Skipping this step and jumping straight to rewriting causes
+  fragmented edits that fix surface symptoms while leaving structural problems
+  intact.
+steps:
+  - title: Sentence structure scan
+    description: >
+      Read every sentence and flag those exceeding 30 words, those using passive
+      voice when an active actor is identifiable, and those containing more than
+      two subordinate clauses. Do not rewrite yet — mark and count only.
+      Record: total sentence count, flagged count, percentage flagged.
+    examples:
+      - "Flag: 'The report was reviewed by the committee and subsequently forwarded to the board for consideration before the deadline.' (passive, 22 words — borderline; restructure if actor matters)."
+      - "Flag: 'Although the system, which was designed under the previous architecture, had been optimised several times, it still exhibited latency.' (33 words, 3 subordinate clauses)."
+  - title: Tone consistency check
+    description: >
+      Identify the dominant register of the piece (formal, technical, conversational,
+      instructional). Then scan for sentences or paragraphs that break that register
+      without justification. Flag: informal contractions in a formal document,
+      unexplained technical jargon in a business summary, hedging language in a
+      directive, or exclamatory tone in a reference document.
+    examples:
+      - "Formal report with one paragraph beginning 'So, basically...' — register break, flag."
+      - "User guide using 'invokes the asynchronous resolution pipeline' where 'starts the background process' is sufficient for the target audience — jargon flag."
+  - title: Readability assessment
+    description: >
+      Assess three dimensions without rewriting: (1) Flesch-Kincaid grade level
+      (approximate: count average sentence length and average syllables per word);
+      (2) paragraph length distribution — flag paragraphs exceeding 8 lines; (3)
+      heading hierarchy — verify H1 → H2 → H3 nesting is consistent and no level
+      is skipped. Record findings as a brief table.
+  - title: Style issue identification
+    description: >
+      Scan for four specific failure classes. Flag each occurrence with a line
+      reference and a one-sentence description of the problem. Do not fix yet.
+      (1) Unclear pronouns — 'it', 'this', 'that' without an unambiguous antecedent
+      within the same or preceding sentence. (2) Redundant phrases — 'in order to',
+      'due to the fact that', 'at this point in time'. (3) Broken parallel structure
+      in lists. (4) Inconsistent terminology — the same concept named differently
+      across sections.
+    examples:
+      - "Pronoun flag: 'The pipeline triggers the validator. It then stores the result.' — 'it' could be pipeline or validator."
+      - "Redundancy flag: 'We need to, in order to meet the deadline, finalise the plan.' → 'We need to finalise the plan to meet the deadline.'"
+      - "Parallel structure flag: List items mixing 'Configuring the server', 'Test the endpoint', 'How to deploy'."
+  - title: Compile findings and generate minimal-diff recommendations
+    description: >
+      Consolidate all flagged items into a findings summary grouped by category.
+      For each finding, propose the smallest change that resolves the issue while
+      preserving the author's voice. Prioritise: (1) clarity blockers — unclear
+      pronouns, broken structure; (2) tone breaks; (3) readability; (4) redundancy.
+      Do not rewrite passages that were not flagged. Preserve the author's phrasing
+      wherever it is clear and appropriately toned.
+references:
+  - name: Audience-Aware Writing
+    type: styleguide
+    id: audience-aware-writing
+    when: Apply audience-aware principles when scoping which tone register is expected.
+  - name: Analysis Extract Before Interpret
+    type: tactic
+    id: analysis-extract-before-interpret
+    when: >
+      Run extraction (steps 1–4) as a separate pass before generating
+      recommendations (step 5) to prevent premature rewriting.
+  - name: Message Framing
+    type: tactic
+    id: message-framing
+    when: When tone findings reveal that message structure needs to change, not just wording.
+failure_modes:
+  - "Rewriting while flagging — blending the diagnostic and revision passes."
+  - "Skipping low-frequency findings — a single unclear pronoun in a key sentence causes more damage than ten redundant phrases."
+  - "Over-flagging — marking stylistic choices (e.g. intentional sentence fragments for effect) as errors."
+  - "Under-flagging register breaks because the reviewer is acclimated to the author's voice."
+notes: >
+  This tactic pairs with the lexical-analysis procedure, which wraps the diagnostic
+  in a full artifact lifecycle: intake, diagnostic, revision, and output record.
+  The diagnostic alone is not a revision; it is the structured foundation that
+  makes revision principled rather than intuitive.
