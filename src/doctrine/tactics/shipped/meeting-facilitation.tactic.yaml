@@ -1,0 +1,86 @@
+schema_version: "1.0"
+id: meeting-facilitation
+name: Meeting Facilitation
+purpose: >
+  Prepare and run a synchronous session so that participants arrive knowing what
+  is expected of them, the session produces a defined output, and follow-up actions
+  are captured with owners before the session ends. Most meeting failures are
+  design failures, not execution failures — the session had no clear goal, no
+  explicit decision rights, or no mechanism for capturing outcomes.
+references:
+  - name: Audience Analysis
+    type: tactic
+    id: audience-analysis
+    when: When designing a session whose participants have significantly different backgrounds or agendas.
+  - name: Stakeholder Alignment
+    type: tactic
+    id: stakeholder-alignment
+    when: When the session must resolve a known tension between participant groups.
+  - name: Problem Decomposition
+    type: tactic
+    id: problem-decomposition
+    when: When the session goal is to decompose a complex problem rather than to decide or inform.
+  - name: Workshop Facilitation
+    type: procedure
+    id: workshop-facilitation
+    when: When the session is multi-segment, multi-hour, or requires structured group activities.
+steps:
+  - title: Define the session goal and output type
+    description: >
+      Before scheduling, write in one sentence what the session must produce.
+      Output types:
+
+      Decision — the session ends with an accepted choice among defined options.
+      Alignment — participants leave with a shared understanding of a situation or plan.
+      Problem-solving — the session generates and evaluates options for a specific problem.
+      Information transfer — the session conveys content that cannot be effectively delivered async.
+      Relationship — the session builds connection and trust; no specific artefact is required.
+
+      If the goal does not match one of these types, defer the meeting until it does.
+      Meetings with compound goals (inform + decide + align) routinely fail to achieve any of them.
+    examples:
+      - "Goal: Decide which of three API versioning approaches to adopt. Output: an accepted decision with rationale recorded in an ADR."
+      - "Goal: Align the product and engineering leads on the Q3 roadmap scope. Output: a written list of in-scope and explicitly out-of-scope items."
+  - title: Select participants by role, not status
+    description: >
+      Invite only those whose input is required to reach the output. Classify
+      each participant as: Decision-maker (must attend), Contributor (needed
+      input), or Observer (can receive async summary). Observers should not
+      attend synchronously unless they have a specific reason. Over-attendance
+      increases coordination cost and reduces contribution quality.
+  - title: Distribute a pre-read with a clear ask
+    description: >
+      Send the agenda, background material, and a specific pre-read ask at
+      least 24 hours before the session. The ask should specify what
+      participants should bring: an opinion, a constraint, a question, or
+      a data point. A meeting that opens with participants unprepared wastes
+      the first third of its time on context-setting that should have been async.
+    examples:
+      - "Pre-read ask: review the three API versioning options in the linked doc and note your top concern for each before the session."
+  - title: Open with goal and timeboxes
+    description: >
+      At the start of the session, restate the output goal and the time allocation
+      for each segment. Confirm that all participants share the same understanding
+      of what the session must produce. If a participant raises a new goal at
+      the opening, record it for a separate session rather than expanding scope.
+  - title: Manage participation balance and divergence
+    description: >
+      Actively ensure that all Contributor participants speak. Draw out quieter
+      participants by name. Interrupt politely when one voice dominates. When
+      discussion diverges from the session goal, park the tangent visibly
+      (write it down) and return to the agenda. Parking lot items should not
+      disappear — assign owners or schedule follow-up before the session ends.
+  - title: Capture decisions, actions, and owners before closing
+    description: >
+      In the final five minutes, summarise: what was decided, what open questions
+      remain, and what follow-up actions were assigned and to whom. Read the
+      summary aloud to the group. Do not close without explicit confirmation
+      from the decision-maker(s) that the captured output is accurate.
+      Distribute the written summary within two hours of the session.
+    examples:
+      - "Decision: API versioning will use URL path versioning. Owner: platform team. Next step: Alex drafts ADR by Thursday."
+failure_modes:
+  - "Scheduling a meeting without a defined output type, resulting in unstructured discussion that produces no artefact."
+  - "Inviting stakeholders by status rather than by role, creating an audience too large to make decisions."
+  - "Failing to distribute a pre-read, resulting in the first 20 minutes being used for context the facilitator already has."
+  - "Closing without capturing actions and owners, causing the meeting to produce no durable change."

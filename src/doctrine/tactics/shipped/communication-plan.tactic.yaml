@@ -1,0 +1,80 @@
+schema_version: "1.0"
+id: communication-plan
+name: Communication Plan
+purpose: >
+  Map every significant communication event for an initiative — who receives
+  what message, through which channel, at what time, and with what goal —
+  so that communication is deliberate rather than reactive. Reactive communication
+  creates information asymmetry: some stakeholders are informed, others discover
+  changes through side channels, and trust erodes.
+references:
+  - name: Audience Analysis
+    type: tactic
+    id: audience-analysis
+    when: Run audience analysis for each segment before designing messages in the plan.
+  - name: Message Framing
+    type: tactic
+    id: message-framing
+    when: When drafting the content for each communication event in the plan.
+  - name: Stakeholder Alignment
+    type: tactic
+    id: stakeholder-alignment
+    when: When the plan must address audiences with conflicting priorities.
+  - name: Stakeholder Communication Planning
+    type: procedure
+    id: stakeholder-communication-planning
+    when: When building a full multi-phase communication plan for a complex initiative.
+steps:
+  - title: Identify communication trigger events
+    description: >
+      List every milestone, decision point, or state change in the initiative
+      that requires an audience to be informed or to take action. Include both
+      positive events (launch, approval, delivery) and negative ones (delays,
+      scope changes, incidents). A stakeholder who is informed only of successes
+      will be surprised by failures; surprise destroys trust faster than bad news.
+    examples:
+      - "Project triggers: kick-off, design review, pilot start, go/no-go decision, rollout, retrospective."
+      - "Incident triggers: first detection, scope confirmation, resolution, post-mortem publication."
+  - title: Map audience to event
+    description: >
+      For each trigger event, specify which audience segments must receive a
+      communication, what they need to know, and what action (if any) is
+      required from them. Different segments often need different messages for
+      the same event: an executive needs an impact summary; an operations team
+      needs action instructions.
+    examples:
+      - "Go/no-go decision: executives (decision outcome + business rationale), engineering team (what changes, what stays same), customer support (FAQ update timeline)."
+  - title: Select channel and format per event-audience pair
+    description: >
+      Assign a channel (email, Slack, meeting, all-hands, written document) and
+      format (announcement, briefing, report, one-pager) to each event-audience
+      pair. Prefer async channels for informational messages and synchronous
+      channels for high-stakes decisions or emotionally sensitive content.
+      Do not use the same channel for all message types — channel fatigue
+      degrades signal quality.
+  - title: Assign message owners and deadlines
+    description: >
+      For each communication event, name a single owner who is responsible for
+      drafting and delivering the message. Set a deadline relative to the
+      trigger event. Communication without an owner and a deadline will not happen.
+      The owner is not necessarily the author — they are accountable for
+      the message being sent.
+  - title: Build in feedback loops
+    description: >
+      For each significant audience segment, create at least one mechanism for
+      receiving feedback on communications: a reply-to address, a Q&A session,
+      a response form, or an explicit check-in. One-way communication plans
+      treat audiences as passive recipients; feedback loops reveal whether the
+      message was understood as intended.
+  - title: Review and update the plan at each milestone
+    description: >
+      Treat the communication plan as a living artefact. Review it at each
+      trigger event, update the message content for the next event based on
+      what changed, and confirm that the audience map still reflects the actual
+      set of stakeholders. Plans that are written at kick-off and never revisited
+      are irrelevant by the first scope change.
+failure_modes:
+  - "Creating a plan that covers only positive milestones; leaving negative events (delays, failures) to reactive ad-hoc communication."
+  - "Assigning no owner to a communication event, resulting in the message not being sent."
+  - "Using a single channel for all messages, causing high-priority communications to be lost in noise."
+  - "Writing the plan once and not revising it when the initiative changes."

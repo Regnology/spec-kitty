@@ -1,0 +1,83 @@
+schema_version: "1.0"
+id: change-management-comms
+name: Change Management Communications
+purpose: >
+  Design the communication strategy for an organisational or process change
+  so that affected people understand why the change is happening, what it
+  means for them specifically, and what role they play in the transition.
+  Change communications that focus on what is changing without explaining
+  why produce resistance; communications that explain why without explaining
+  what to do produce anxiety.
+references:
+  - name: Audience Analysis
+    type: tactic
+    id: audience-analysis
+    when: Run audience analysis before designing change messages to segment by role, impact level, and readiness.
+  - name: Message Framing
+    type: tactic
+    id: message-framing
+    when: When drafting change messages; the Situation-Complication-Resolution pattern is typically appropriate.
+  - name: Stakeholder Alignment
+    type: tactic
+    id: stakeholder-alignment
+    when: When the change affects groups with competing interests; align before communicating broadly.
+  - name: Communication Plan
+    type: tactic
+    id: communication-plan
+    when: When the change spans multiple phases; build a communication plan to coordinate the full message sequence.
+steps:
+  - title: Characterise the change and its impact
+    description: >
+      Before communicating externally, establish internally: what is changing,
+      why it is changing now, who is affected and how significantly, what the
+      timeline is, and what success looks like after the change is complete.
+      A sponsor who cannot answer these questions clearly is not ready to
+      communicate the change.
+    examples:
+      - "Change: moving from weekly all-hands to monthly. Why now: cost and scheduling burden. Impact: teams lose a weekly synchronisation point. Mitigation: team-level syncs remain weekly."
+  - title: Identify the change impact per audience segment
+    description: >
+      For each audience segment, specify: what changes for them specifically,
+      what stays the same, and what action (if any) they must take. Generic
+      change communications that do not address specific audience impact force
+      individuals to extract their own implications — and they will, through the
+      lens of their existing anxieties.
+    examples:
+      - "Engineering teams: their daily workflow does not change. Managers: must now provide written weekly updates to replace the all-hands format."
+  - title: Lead with the reason, not the announcement
+    description: >
+      Open change communications with the reason the change is necessary before
+      describing the change itself. Audiences who do not understand the reason
+      for a change interpret it as arbitrary; arbitrary changes produce resistance
+      regardless of their merits. The reason must be honest and specific —
+      "to improve efficiency" is not a reason; "to reduce the three hours per week
+      currently spent on coordination that can be handled asynchronously" is.
+  - title: Address the unspoken questions
+    description: >
+      Every significant change communication will prompt the same questions,
+      even if they are not asked aloud: Is my role secure? Will I be required to
+      do more work? Is this a sign of a larger problem? Address these questions
+      directly, even when the answers are "we don't know yet" or "some roles will
+      change". Silence on predictable questions will be interpreted as confirmation
+      of the worst case.
+    examples:
+      - "If headcount is not affected: say so explicitly. If it is uncertain: acknowledge the uncertainty and state when clarity will be provided."
+  - title: Create visible channels for questions and feedback
+    description: >
+      Publish at least one explicit channel for questions immediately with the
+      initial announcement. A frequently-asked-questions document updated after
+      the first wave of responses is a high-leverage investment. A feedback
+      channel that is visibly read and responded to demonstrates that the change
+      is being managed, not imposed.
+  - title: Follow up after the change takes effect
+    description: >
+      Schedule a follow-up communication after the change has been in effect
+      for a defined period. Acknowledge what is working, address what is not,
+      and confirm or revise the timeline for subsequent phases. Changes that are
+      announced once and then silenced produce the impression that leadership
+      does not care about the impact.
+failure_modes:
+  - "Announcing the change without explaining the reason, provoking resistance to the change rather than to the problem it solves."
+  - "Using the same message for all audience segments, leaving affected groups uncertain about their specific situation."
+  - "Treating the communication as complete after the initial announcement; change communication is a sustained activity, not an event."
+  - "Opening a feedback channel and then not responding to it, signalling that feedback is not actually wanted."

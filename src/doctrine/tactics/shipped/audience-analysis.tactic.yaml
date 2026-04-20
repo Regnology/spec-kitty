@@ -1,0 +1,76 @@
+schema_version: "1.0"
+id: audience-analysis
+name: Audience Analysis
+purpose: >
+  Identify who will receive a communication, what they already know, what they
+  need to know, and what emotional or organisational context shapes their
+  reception — before a single word of the message is drafted. Skipping audience
+  analysis is the single most common cause of technically accurate but
+  organisationally ineffective communication.
+references:
+  - name: Stakeholder Alignment
+    type: tactic
+    id: stakeholder-alignment
+    when: >
+      When the audience map reveals groups with conflicting priorities; run
+      stakeholder alignment to surface and name the tensions before drafting.
+  - name: Audience-Aware Writing
+    type: styleguide
+    id: audience-aware-writing
+    when: When authoring written artefacts for the identified audience.
+steps:
+  - title: Enumerate all audience segments
+    description: >
+      List every distinct group that will receive or be affected by this
+      communication. Treat each group separately even when they overlap —
+      a CTO and a senior engineer may be in the same meeting but have
+      different information needs. Do not pre-filter: a missed segment
+      discovered post-distribution is far more expensive than an extra row
+      in the analysis.
+    examples:
+      - "For a product roadmap update: executive sponsors, product managers, engineering leads, customer-facing staff, end users."
+      - "For a process change announcement: affected teams, adjacent teams whose workflows change, compliance reviewers, managers who must cascade the message."
+  - title: Assess prior knowledge per segment
+    description: >
+      For each segment, answer: What do they already know about this topic?
+      What terms, acronyms, or concepts can be assumed? What assumptions do
+      they currently hold that may be wrong? Overestimating prior knowledge
+      produces messages that exclude; underestimating produces messages that
+      patronise. Both erode trust.
+    examples:
+      - "Executive audience: knows the business problem, does not know implementation detail. Avoid technical jargon; lead with business impact."
+      - "Engineering audience: knows implementation context, may not know the business rationale. Lead with the why before the what."
+  - title: Identify information needs and success criteria per segment
+    description: >
+      For each segment, define: What does this audience need to know or do
+      as a result of this communication? What does a successful outcome look
+      like from their perspective? A communication that informs one segment
+      may need to motivate another and reassure a third. These are different
+      messages, not different wordings of the same message.
+  - title: Map emotional and organisational context
+    description: >
+      Identify the emotional state and organisational pressures each segment
+      brings to this communication. Are they anxious, resistant, enthusiastic,
+      or indifferent? Are they under deadline pressure, recovering from a
+      recent failure, or advocating for a competing initiative? Context shapes
+      reception more than content does. A technically correct message delivered
+      without context awareness will be reinterpreted through the audience's
+      existing frame.
+    examples:
+      - "Team recently impacted by layoffs: any change message will be read through a threat lens. Acknowledge continuity and stability explicitly before describing the change."
+      - "Audience championing a competing approach: lead with shared goals, not with why their approach is wrong."
+  - title: Select communication format and channel per segment
+    description: >
+      Match the format and channel to the audience's context. Asynchronous
+      written artefacts suit distributed audiences or complex information
+      requiring re-reading. Synchronous sessions suit high-uncertainty topics
+      requiring Q&A or alignment. Do not default to the channel that is easiest
+      for the sender — choose the channel that creates the least friction for
+      the receiver.
+    examples:
+      - "Executive decision request: one-page written summary with a clear ask, followed by a 15-minute sync for questions."
+      - "Cross-team process change: async written announcement with a live Q&A session within 48 hours."
+notes: >
+  The audience analysis artefact is an input to message framing, communication
+  planning, and workshop facilitation. Record the analysis so it can be reviewed
+  when the communication is drafted and again when feedback is incorporated.

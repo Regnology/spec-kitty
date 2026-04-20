@@ -1,0 +1,78 @@
+schema_version: "1.0"
+id: retrospective
+name: Retrospective
+purpose: >
+  Conduct a structured team reflection after a completed period of work to
+  identify what should be preserved, what should be changed, and what should be
+  tried — and to convert those insights into a small number of concrete,
+  owned improvement actions. A retrospective that produces only discussion
+  and no committed actions is not a retrospective; it is a complaint session.
+references:
+  - name: Premortem Risk Identification
+    type: tactic
+    id: premortem-risk-identification
+    when: >
+      When patterns of recurring failure emerge during the retrospective;
+      run a premortem before the next period to surface those failure modes
+      in advance.
+  - name: Stopping Conditions
+    type: tactic
+    id: stopping-conditions
+    when: >
+      When a recurring problem has resisted multiple improvement cycles;
+      use stopping conditions to define the threshold at which the approach
+      must be abandoned.
+  - name: Eisenhower Prioritisation
+    type: tactic
+    id: eisenhower-prioritisation
+    when: When the retrospective generates more action candidates than the team can address.
+steps:
+  - title: Set the stage
+    description: >
+      Before reviewing the period, establish psychological safety. Explicitly
+      state that the retrospective is for improving the system, not for
+      assigning individual blame. Use the Prime Directive: "Regardless of what
+      we discover, we understand and truly believe that everyone did the best job
+      they could, given what they knew at the time, their skills and abilities,
+      the resources available, and the situation at hand." (Norm Kerth).
+      If the team cannot commit to this framing, name the obstacle before continuing.
+  - title: Gather data on the period
+    description: >
+      Collect factual observations about the period — events, outcomes, metrics,
+      incidents. Separate observations from interpretations at this stage.
+      Use a structured format to surface the full range of experience:
+      What happened that was positive? What happened that was negative?
+      What surprised us? What did we expect that did not occur?
+      Give every participant equal space to contribute.
+    examples:
+      - "Positive: deployment pipeline ran without intervention for the first time. Negative: on-call rotation was uneven and caused fatigue. Surprise: third-party API latency doubled mid-sprint."
+  - title: Generate insights
+    description: >
+      Cluster the gathered data into themes. For each theme, ask: why did this
+      happen? Look for systemic causes rather than individual errors. Apply the
+      five-whys technique to avoid stopping at surface symptoms. The insight
+      phase is complete when the team can name the system behaviour — not the
+      person — that produced each theme.
+    examples:
+      - "Theme: delayed code reviews. Root cause: review requests were not visible to the team until they were overdue. System cause: no shared queue; each reviewer managed their own notifications."
+  - title: Decide on improvement actions
+    description: >
+      From the insights, generate candidate improvement actions. Score each
+      candidate by impact and effort. Select at most three to carry into the
+      next period — more than three is a signal that none will be completed.
+      Each selected action must have a named owner, a clear done criterion,
+      and a check-in date. An action without an owner is not an action.
+    examples:
+      - "Action: create shared review queue in the team board. Owner: Jamie. Done when: queue is live and used by end of next sprint. Check-in: sprint review."
+  - title: Close and commit
+    description: >
+      Read the selected actions and their owners aloud. Confirm each owner
+      accepts the commitment. Record the actions in the team's tracking system
+      immediately — not after the meeting. Schedule the check-in date.
+      Begin the next retrospective by reviewing whether the previous period's
+      actions were completed and what effect they had.
+notes: >
+  Retrospectives should be time-boxed: 60 minutes for a two-week period,
+  90 minutes for a monthly or quarterly period. If the team regularly exceeds
+  the timebox, the gather-data step is absorbing time that belongs to insights
+  and actions — consider async data gathering before the session.

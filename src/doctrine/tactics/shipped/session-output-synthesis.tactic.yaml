@@ -1,0 +1,105 @@
+schema_version: "1.0"
+id: session-output-synthesis
+name: Session Output Synthesis
+purpose: >
+  Convert raw session output — transcript, notes, voted items, completed canvases,
+  chat log — into a structured synthesis document that the Human-in-Charge can
+  confirm and distribute. Raw output from a group session is inherently messy:
+  decisions are tangled with discussion, action items are implied rather than stated,
+  and parked items are mixed with resolved ones. Synthesis separates these categories,
+  resolves ambiguity where possible, and flags what cannot be resolved without human
+  confirmation. A synthesis that silently infers contested decisions is worse than
+  no synthesis at all.
+references:
+  - name: Meeting Facilitation
+    type: tactic
+    id: meeting-facilitation
+    when: For context on the session's intended output type and closing contract; use to cross-check whether the session met its goal.
+  - name: Audience-Aware Writing
+    type: styleguide
+    id: audience-aware-writing
+    when: When producing the final summary for distribution; apply audience-aware writing for the receiving audience, not the session participants.
+steps:
+  - title: Establish the session context
+    description: >
+      Before reading the raw output, record: the session goal, the intended output
+      type (decision / alignment / problem-solving / information-transfer), and any
+      context the Human-in-Charge provided about what deviated from the plan
+      (segments skipped, decisions deferred, unexpected conflicts). This context
+      is the lens through which the raw output is read — without it, synthesis
+      produces a transcript summary rather than a goal-oriented artefact.
+  - title: Extract and classify all items
+    description: >
+      Read through the raw output once without writing anything. On the second
+      pass, classify every substantive item into one of five categories:
+
+      Decision — a choice was made and accepted by the group or the decision-maker.
+      Action — a specific task was assigned or accepted by a named person.
+      Parked — a topic was acknowledged but explicitly deferred.
+      Open question — a question was raised that was not answered in the session.
+      Context — background or discussion that does not produce a decision, action, or question.
+
+      Do not collapse categories. An action implied by a decision is still an action
+      and must be extracted separately. Context items are not discarded — they are
+      summarised as the rationale for decisions, not listed as standalone items.
+    examples:
+      - "Decision: the team agreed to adopt URL path versioning. Context (rationale): header-based versioning was rejected because it is invisible in browser logs."
+      - "Action: Alex will draft the ADR by Thursday. (Extracted from: 'Alex, can you write that up?' / 'Sure.')"
+      - "Parked: the question of backward compatibility for v1 clients was noted but deferred to the next session."
+  - title: Draft the decisions section
+    description: >
+      For each decision, write: what was decided, the key reasoning that led to it
+      (from the context items), and who made or confirmed the decision. Do not
+      write the full discussion — write the conclusion and its rationale.
+      Where the raw output shows apparent agreement but no explicit confirmation,
+      flag it as a candidate decision requiring the Human-in-Charge's confirmation
+      rather than treating it as settled.
+    examples:
+      - "CONFIRMED: URL path versioning adopted. Rationale: header-based approach rejected due to log invisibility; query-string approach rejected due to caching complexity."
+      - "NEEDS CONFIRMATION: The group appeared to agree that the migration timeline should shift by two weeks, but this was not explicitly confirmed before the session closed."
+  - title: Build the action register
+    description: >
+      For each action item, record: the action in one sentence starting with a
+      verb, the named owner, the agreed deadline (or flag as unassigned if not
+      stated), and a done criterion if one was discussed. An action without a
+      named owner is not an action — mark it as unassigned and flag it for the
+      Human-in-Charge to assign before the summary is distributed.
+    examples:
+      - "Draft ADR for URL path versioning decision. Owner: Alex. Deadline: Thursday. Done when: ADR reviewed and merged."
+      - "UNASSIGNED: Update the API documentation to reflect the new versioning scheme. Needs owner."
+  - title: Record parked items and open questions
+    description: >
+      List every parked item with the reason it was deferred (if stated) and
+      a suggested owner or next step for resolution. List every open question
+      that was raised but not answered, with the person who raised it if
+      identifiable. Do not omit items because they seem minor — the Human-in-Charge
+      decides what is minor, not the synthesis.
+  - title: Flag ambiguities for Human-in-Charge resolution
+    description: >
+      Collect all items that cannot be classified or stated with confidence from
+      the raw output alone and present them as an explicit disambiguation list.
+      Each flag must state what the ambiguity is and what the two or more
+      plausible interpretations are. Do not resolve ambiguities silently.
+    examples:
+      - "Ambiguity: It is unclear whether the decision to 'revisit caching in Q3' is a confirmed action assigned to the platform team or an informal note. Please confirm."
+      - "Ambiguity: Two different deadlines were mentioned for the migration — 'before the release' and 'end of month'. Which applies?"
+  - title: Assemble the synthesis document
+    description: >
+      Compose the final synthesis document in this order: session goal and whether
+      it was met, decisions (confirmed and pending confirmation), action register,
+      parked items, open questions, disambiguation flags. Include a brief executive
+      summary (two to four sentences) at the top for participants who will read
+      only that far. Apply the audience-aware-writing styleguide for the
+      distribution audience.
+      Mark the document clearly as DRAFT until the Human-in-Charge confirms it.
+failure_modes:
+  - "Treating apparent consensus as a confirmed decision without explicit confirmation from the decision-maker."
+  - "Omitting actions that were implied by discussion but never stated as explicit assignments."
+  - "Resolving ambiguities by inference rather than flagging them for the Human-in-Charge."
+  - "Merging parked items into decisions, losing the distinction between what was decided and what was deferred."
+notes: >
+  The quality of synthesis is bounded by the quality of the raw output provided.
+  A session with no notes, no transcript, and no completed canvases cannot be
+  synthesised accurately. If the raw output is too sparse to support a reliable
+  synthesis, the correct response is to flag this to the Human-in-Charge and
+  request clarification rather than producing a synthesis that fills gaps with inference.

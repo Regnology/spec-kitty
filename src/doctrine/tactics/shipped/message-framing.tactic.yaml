@@ -1,0 +1,85 @@
+schema_version: "1.0"
+id: message-framing
+name: Message Framing
+purpose: >
+  Translate raw information into a structured message whose opening, structure,
+  and language are explicitly chosen for a specific audience's context, prior
+  knowledge, and decision needs. Facts without framing create cognitive noise;
+  framing without facts creates spin. This tactic produces neither.
+references:
+  - name: Audience Analysis
+    type: tactic
+    id: audience-analysis
+    when: Run audience analysis before framing to establish what each segment knows, needs, and fears.
+  - name: Audience-Aware Writing
+    type: styleguide
+    id: audience-aware-writing
+    when: When producing the written output of this framing work.
+  - name: Stakeholder Alignment
+    type: tactic
+    id: stakeholder-alignment
+    when: When the framing must address known tensions between audience segments.
+steps:
+  - title: State the core message in one sentence
+    description: >
+      Before structuring the message, write the single most important thing the
+      audience must take away. If it cannot be expressed in one sentence, the
+      message is not yet clear. Do not proceed to structure or tone until this
+      sentence is sharp, true, and audience-specific.
+    examples:
+      - "We are changing the release schedule from monthly to bi-weekly, starting next quarter, to reduce the cost of late defect discovery."
+      - "The budget for this initiative has been approved; implementation begins in two weeks and requires input from your team by Friday."
+  - title: Choose the structural pattern
+    description: >
+      Select the structure that matches the audience's decision state and the
+      message type. Common patterns:
+
+      Bottom-line-up-front (BLUF): Lead with the conclusion, then the evidence.
+      Use for decision-makers, busy readers, and high-stakes announcements.
+
+      Problem-solution-benefit: Describe the current pain, present the solution,
+      quantify the benefit. Use for audiences who are unaware of the problem or
+      resistant to the proposed change.
+
+      Situation-complication-resolution: Describe the stable state, introduce
+      the disruption, explain the path forward. Use for audiences mid-crisis or
+      managing significant uncertainty.
+
+      Chronological: Describe events in order. Use only when sequence is the
+      primary information — process documentation, incident reports.
+    examples:
+      - "Executive update: BLUF — decision needed, background, implications."
+      - "Engineering migration guide: situation (current state) → complication (why it must change) → resolution (steps and timeline)."
+  - title: Calibrate vocabulary and abstraction level
+    description: >
+      Replace every term the audience does not share with a term they do, or
+      define it on first use. Adjust abstraction level to match the audience's
+      role: executives need outcome-level language; engineers need mechanism-level
+      language; operators need action-level language. Mixed-abstraction messages
+      lose all three audiences.
+    examples:
+      - "Replace 'idempotent retry logic' with 'the system will safely retry without causing duplicate records' for a non-technical audience."
+      - "Replace 'user experience improvements' with 'the checkout step count drops from seven to three, reducing abandonment' for a product audience."
+  - title: Identify and neutralise emotional landmines
+    description: >
+      Review the draft for language that will trigger defensive reactions,
+      status anxiety, or blame attribution in the target audience. Replace or
+      reframe without softening the substance. Passive-aggressive phrasing,
+      unexplained urgency, and implicit blame are the most common landmines.
+    examples:
+      - "Replace 'this was not done correctly' with 'the previous approach did not account for X, which is now resolved by Y'."
+      - "Replace 'as previously communicated' (blame) with 'to recap' (neutral continuity)."
+  - title: Define the call to action explicitly
+    description: >
+      State what the audience should do, decide, or believe differently as a
+      result of this communication. A message without a clear call to action
+      produces no change in behaviour. For informational messages, the call to
+      action is often acknowledgement — make that explicit rather than implicit.
+    examples:
+      - "Please confirm by Thursday whether your team can participate in the pilot. No response by Thursday will be read as a yes."
+      - "No action required. This message is for your awareness; the implementation team will contact you directly if input is needed."
+failure_modes:
+  - "Drafting for the sender's preferred format rather than the audience's decision context."
+  - "Burying the core message after three paragraphs of context the audience already has."
+  - "Using undefined jargon with a non-specialist audience, or over-explaining basics to a specialist audience."
+  - "Omitting the call to action, leaving the audience uncertain what to do next."
